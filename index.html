@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essex Improvements Ltd — Builders in Essex Since 1990</title>
+<meta name="description" content="Essex Improvements Ltd is a family-run building company delivering extensions, renovations, kitchens, bathrooms and property improvements across Essex since 1990.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ink:#171520;
+    --ink-2:#201E2E;
+    --ink-3:#2C2840;
+    --paper:#F4F3F8;
+    --paper-2:#E9E7F1;
+    --paper-3:#D3CFE2;
+    --brick:#6B5EC2;
+    --brick-dark:#4B3E99;
+    --timber:#7A87A5;
+    --stone:#908EA0;
+    --line-on-dark: rgba(244,243,248,0.16);
+    --line-on-light: rgba(23,21,32,0.14);
+    --max: 1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%;height:auto;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+
+  h1,h2,h3{
+    font-family:'Archivo Expanded',sans-serif;
+    font-weight:800;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  h2{font-size:clamp(1.9rem,3.4vw,2.5rem);}
+  h3{font-size:1.2rem;font-weight:700;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--brick);
+    outline-offset:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 26px;
+    font-weight:700;
+    font-size:15px;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .btn-brick{background:var(--brick);color:var(--paper);}
+  .btn-brick:hover{background:var(--brick-dark);}
+  .btn-line-light{border-color:rgba(244,239,228,0.55);color:var(--paper);}
+  .btn-line-light:hover{border-color:var(--paper);background:rgba(244,239,228,0.08);}
+  .btn-line-dark{border-color:var(--ink);color:var(--ink);}
+  .btn-line-dark:hover{background:var(--ink);color:var(--paper);}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--paper);
+    border-bottom:1px solid var(--line-on-light);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;max-width:var(--max);margin:0 auto;
+  }
+  .brand{
+    font-family:'Archivo Expanded',sans-serif;
+    font-weight:900;
+    font-size:19px;
+    letter-spacing:-0.01em;
+  }
+  .brand span{color:var(--brick);}
+  .nav-links{display:flex;gap:30px;align-items:center;}
+  .nav-links a{font-size:15px;font-weight:600;padding:6px 0;border-bottom:2px solid transparent;}
+  .nav-links a:hover{border-bottom-color:var(--brick);}
+  .nav-cta{display:flex;align-items:center;gap:18px;}
+  .nav-phone{font-weight:700;font-size:15px;white-space:nowrap;}
+  .nav-toggle{display:none;background:none;border:none;font-size:26px;cursor:pointer;}
+
+  @media (max-width:860px){
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--paper);
+      flex-direction:column;align-items:flex-start;
+      padding:8px 28px 24px;
+      gap:16px;
+      border-bottom:1px solid var(--line-on-light);
+      display:none;
+    }
+    .nav-links.open{display:flex;}
+    .nav-toggle{display:block;}
+    .nav-phone{display:none;}
+  }
+
+  @media (max-width:560px){
+    .nav{padding:14px 20px;}
+    .nav-cta{gap:12px;}
+    .nav-cta .btn{
+      font-size:13px;
+      padding:10px 16px;
+    }
+    .brand{
+      font-size:16px;
+      line-height:1.15;
+    }
+    .brand span{
+      display:block;
+    }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:88vh;
+    display:flex;
+    align-items:flex-end;
+    background:#000;
+    overflow:hidden;
+  }
+  .hero-img{
+    position:absolute;inset:0;
+    background-image:url('https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/aeb357ba-8a01-4be3-b6a6-1d94c4db0bd1-1920w.jpg');
+    background-size:cover;background-position:center;
+    opacity:0;
+    animation:heroReveal 1.4s ease forwards;
+  }
+  @keyframes heroReveal{ to{opacity:1;} }
+  .hero-scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(20,17,14,0.35) 0%, rgba(20,17,14,0.55) 45%, rgba(15,13,11,0.94) 100%);
+  }
+  .hero-inner{
+    position:relative;z-index:2;
+    max-width:var(--max);margin:0 auto;
+    padding:0 28px 56px;
+    width:100%;
+  }
+  .hero-content{max-width:680px;}
+  .hero h1{
+    color:var(--paper);
+    font-size:clamp(2.3rem,5vw,3.9rem);
+    opacity:0; transform:translateY(14px);
+    animation:heroUp 0.8s ease 0.5s forwards;
+  }
+  .hero p{
+    color:var(--paper-3);
+    font-size:19px;
+    max-width:560px;
+    margin-top:18px;
+    opacity:0; transform:translateY(14px);
+    animation:heroUp 0.8s ease 0.7s forwards;
+  }
+  .hero-ctas{
+    display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;
+    opacity:0; transform:translateY(14px);
+    animation:heroUp 0.8s ease 0.9s forwards;
+  }
+  @keyframes heroUp{ to{opacity:1;transform:translateY(0);} }
+
+  /* stat strip */
+  .stats{
+    background:var(--ink);
+    border-top:1px solid var(--line-on-dark);
+  }
+  .stats-row{
+    max-width:var(--max);margin:0 auto;padding:0 28px;
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .stat{
+    padding:22px 24px;
+    border-left:1px solid var(--line-on-dark);
+    color:var(--paper);
+  }
+  .stat:first-child{border-left:none;}
+  .stat b{
+    display:block;font-family:'Archivo Expanded',sans-serif;font-size:1.05rem;font-weight:800;
+  }
+  .stat span{display:block;font-size:13.5px;color:var(--stone);margin-top:2px;}
+  @media (max-width:760px){
+    .stats-row{grid-template-columns:repeat(2,1fr);}
+    .stat{padding:16px;}
+    .stat:nth-child(3){border-left:none;}
+  }
+
+  section{padding:88px 0;}
+  .section-tag{
+    font-size:14px;font-weight:600;color:var(--timber);margin-bottom:10px;
+  }
+
+  /* ---------- TRUST ---------- */
+  .trust{background:var(--paper);}
+  .trust-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start;}
+  .trust h2{margin-bottom:22px;max-width:460px;}
+  .trust-list{display:flex;flex-direction:column;gap:14px;margin-top:26px;}
+  .trust-list li{display:flex;gap:12px;align-items:flex-start;font-size:16px;}
+  .trust-list .mark{
+    flex:0 0 auto;width:20px;height:20px;margin-top:2px;
+    background:var(--brick);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:900;
+  }
+  .review-card{
+    background:var(--ink);color:var(--paper);
+    padding:34px;
+    border-top:4px solid var(--brick);
+  }
+  .review-stars{color:#E3A93F;font-size:20px;letter-spacing:3px;margin-bottom:14px;}
+  .review-card p{color:var(--paper-3);font-size:15.5px;}
+  .review-note{
+    margin-top:22px;padding-top:18px;border-top:1px solid var(--line-on-dark);
+    font-size:13.5px;color:var(--stone);
+  }
+  @media (max-width:860px){ .trust-grid{grid-template-columns:1fr;gap:40px;} }
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--ink);color:var(--paper);}
+  .services h2{color:var(--paper);}
+  .services > .wrap > p{color:var(--paper-3);max-width:520px;margin-top:14px;}
+  .service-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr;
+    grid-template-rows:auto auto;
+    gap:18px;
+    margin-top:44px;
+  }
+  .svc{
+    position:relative;overflow:hidden;
+    min-height:260px;
+    display:flex;align-items:flex-end;
+    background:var(--ink-2);
+  }
+  .svc.featured{grid-row:1 / span 2;min-height:100%;}
+  .svc img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:saturate(0.92) brightness(0.72);
+  }
+  .svc-label{
+    position:relative;z-index:2;padding:24px;
+  }
+  .svc-label h3{color:var(--paper);}
+  .svc-label p{color:var(--paper-3);font-size:14.5px;margin-top:6px;max-width:280px;}
+  .svc.featured .svc-label h3{font-size:1.5rem;}
+  .services-more{
+    margin-top:26px;
+    display:flex;flex-wrap:wrap;gap:10px 26px;
+    color:var(--stone);font-size:14.5px;
+    border-top:1px solid var(--line-on-dark);
+    padding-top:22px;
+  }
+  .services-more a{border-bottom:1px solid transparent;color:var(--paper-3);}
+  .services-more a:hover{border-bottom-color:var(--brick);color:var(--paper);}
+  @media (max-width:900px){
+    .service-grid{grid-template-columns:1fr 1fr;}
+    .svc.featured{grid-column:1/-1;grid-row:auto;min-height:280px;}
+  }
+  @media (max-width:600px){
+    .service-grid{grid-template-columns:1fr;}
+    .svc.featured{grid-column:auto;}
+  }
+
+  /* ---------- WHY US ---------- */
+  .why{background:var(--paper);}
+  .why-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    margin-top:44px;
+    border-top:1px solid var(--line-on-light);
+  }
+  .why-card{
+    padding:30px 26px 30px 24px;
+    border-left:3px solid var(--brick);
+    border-right:1px solid var(--line-on-light);
+  }
+  .why-card:last-child{border-right:none;}
+  .why-card h3{margin-bottom:10px;}
+  .why-card p{font-size:15px;color:#4b463d;}
+  @media (max-width:900px){
+    .why-grid{grid-template-columns:1fr 1fr;}
+    .why-card{border-right:1px solid var(--line-on-light) !important;}
+  }
+  @media (max-width:560px){ .why-grid{grid-template-columns:1fr;} }
+
+  /* ---------- PROJECTS ---------- */
+  .projects{background:var(--paper-2);}
+  .project{
+    display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:0;
+    margin-top:36px;
+    border:1px solid var(--line-on-light);
+  }
+  .project figure{position:relative;margin:0;}
+  .project figure figcaption{
+    position:absolute;left:0;bottom:0;
+    background:rgba(30,27,23,0.82);color:var(--paper);
+    font-size:12.5px;font-weight:600;
+    padding:6px 12px;
+  }
+  .project img{width:100%;height:280px;object-fit:cover;}
+  .project-info{
+    background:var(--ink);color:var(--paper);
+    padding:30px;display:flex;flex-direction:column;
+  }
+  .project-info h3{color:var(--paper);}
+  .project-info .loc{color:var(--stone);font-size:14px;margin-top:4px;}
+  .project-info ul{margin-top:16px;display:flex;flex-direction:column;gap:6px;}
+  .project-info ul li{font-size:14.5px;color:var(--paper-3);padding-left:14px;position:relative;}
+  .project-info ul li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--brick);}
+  .project-info a{
+    margin-top:auto;padding-top:18px;font-size:14.5px;font-weight:700;color:var(--paper);
+    border-top:1px solid var(--line-on-dark);margin-top:20px;
+  }
+  @media (max-width:900px){
+    .project{grid-template-columns:1fr 1fr;}
+    .project-info{grid-column:1/-1;}
+  }
+  @media (max-width:600px){
+    .project{grid-template-columns:1fr;}
+    .project img{height:220px;}
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process{background:var(--ink);color:var(--paper);}
+  .process h2{color:var(--paper);}
+  .steps{margin-top:50px;max-width:680px;}
+  .step{
+    display:grid;grid-template-columns:64px 1fr;gap:22px;
+    padding-bottom:38px;position:relative;
+  }
+  .step:not(:last-child)::before{
+    content:"";position:absolute;left:31px;top:52px;bottom:0;
+    width:1px;background:var(--line-on-dark);
+  }
+  .step-num{
+    width:64px;height:64px;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line-on-dark);
+    font-family:'Archivo Expanded',sans-serif;font-weight:800;font-size:18px;
+    color:var(--paper);
+  }
+  .step h3{color:var(--paper);}
+  .step p{color:var(--paper-3);margin-top:6px;font-size:15px;max-width:460px;}
+  .process-cta{margin-top:6px;}
+
+  /* ---------- AREAS ---------- */
+  .areas{background:var(--paper);}
+  .areas-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;margin-top:20px;align-items:start;}
+  .areas p.lead{max-width:440px;color:#4b463d;}
+  .area-tags{display:flex;flex-wrap:wrap;gap:10px;}
+  .area-tags span{
+    padding:9px 16px;border:1px solid var(--line-on-light);font-size:14.5px;font-weight:600;
+  }
+  @media (max-width:860px){ .areas-grid{grid-template-columns:1fr;gap:28px;} }
+
+  /* ---------- FAQ ---------- */
+  .faq{background:var(--paper-2);}
+  .faq-list{max-width:760px;margin-top:36px;}
+  .faq-item{border-bottom:1px solid var(--line-on-light);}
+  .faq-item summary{
+    padding:22px 0;cursor:pointer;font-weight:700;font-size:17px;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;
+    list-style:none;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"+";font-size:22px;font-weight:400;color:var(--brick);flex:0 0 auto;
+    transition:transform 0.2s ease;
+  }
+  .faq-item[open] summary::after{transform:rotate(45deg);}
+  .faq-item p{padding:0 0 22px;color:#4b463d;font-size:15.5px;max-width:640px;}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    background:var(--brick);
+    color:var(--paper);
+    text-align:left;
+  }
+  .final-cta h2{color:var(--paper);font-size:clamp(2rem,4vw,3rem);max-width:640px;}
+  .final-cta p{color:rgba(244,239,228,0.88);margin-top:16px;max-width:520px;font-size:17px;}
+  .final-cta .hero-ctas{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
+  .final-cta .btn-line-light{border-color:rgba(244,239,228,0.6);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink-3);color:var(--stone);padding:56px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;}
+  .foot-brand{font-family:'Archivo Expanded',sans-serif;font-weight:900;color:var(--paper);font-size:19px;}
+  .foot-brand span{color:var(--brick);}
+  footer h4{color:var(--paper);font-size:14px;font-weight:700;margin-bottom:14px;}
+  footer ul li{margin-bottom:9px;font-size:14.5px;}
+  footer ul li a:hover{color:var(--paper);}
+  footer p.tag{margin-top:14px;font-size:14.5px;max-width:320px;}
+  .foot-bottom{
+    margin-top:44px;padding-top:22px;border-top:1px solid var(--line-on-dark);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;
+  }
+  @media (max-width:760px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .foot-grid{grid-template-columns:1fr;} }
+
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="brand">Essex <span>Improvements</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#why">About</a></li>
+      <li><a href="#areas">Areas we serve</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:07768907267">07768 907267</a>
+      <a class="btn btn-brick" href="#quote">Get a free quote</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1>Trusted builders across Essex, since 1990</h1>
+      <p>Essex Improvements Ltd is a family-run building company delivering extensions, renovations, kitchens, bathrooms and property improvements throughout Essex — one project at a time.</p>
+      <div class="hero-ctas">
+        <a href="#quote" class="btn btn-brick">Get a free quote</a>
+        <a href="tel:07768907267" class="btn btn-line-light">Call 07768 907267</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stats-row">
+    <div class="stat"><b>36 years</b><span>Building in Essex</span></div>
+    <div class="stat"><b>Family-run</b><span>Since 1990</span></div>
+    <div class="stat"><b>FMB affiliated</b><span>Federation of Master Builders</span></div>
+    <div class="stat"><b>One at a time</b><span>Your project gets our full team</span></div>
+  </div>
+</div>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div>
+      <h2>A builder you can trust with your home</h2>
+      <p style="color:#4b463d;max-width:460px;">We've been part of the Essex building trade since 1990. That means decades of jobs finished properly, tradespeople who know what they're doing, and a business that's still run by the same family that started it.</p>
+      <ul class="trust-list">
+        <li><span class="mark">✓</span> Established in 1990, Essex Improvements Ltd since 2003</li>
+        <li><span class="mark">✓</span> Family-run — not a franchise, not a call centre</li>
+        <li><span class="mark">✓</span> One project at a time, so your job gets our full attention</li>
+        <li><span class="mark">✓</span> Electrical work certified by NICEIC operatives</li>
+        <li><span class="mark">✓</span> Plumbing and gas work certified Gas Safe</li>
+        <li><span class="mark">✓</span> Federation of Master Builders affiliated</li>
+      </ul>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>Most of our new work comes from clients who've used us before, or from a recommendation to a friend or neighbour. That's the kind of trust we build our reputation on.</p>
+      <div class="review-note">Google review rating and links to be added here once connected — this panel is built to hold your live star rating and a handful of real client reviews.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <h2>What we do</h2>
+    <p>From a single extension to a full renovation, our tradespeople cover the work most Essex homes need — start to finish.</p>
+    <div class="service-grid">
+      <a class="svc featured" href="#quote">
+        <img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/77c44bff-8da7-4747-a877-7e1e6cf2c9a1-1920w.jpg" alt="Completed house extension by Essex Improvements">
+        <div class="svc-label">
+          <h3>House extensions</h3>
+          <p>Add the space you need without the upheaval of moving home.</p>
+        </div>
+      </a>
+      <a class="svc" href="#quote">
+        <img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/f834ffcf-d59d-4931-beaa-d78e760ce837-1920w.jpg" alt="Home renovation project in Essex">
+        <div class="svc-label">
+          <h3>Home renovations</h3>
+          <p>Transform outdated or poorly configured spaces.</p>
+        </div>
+      </a>
+      <a class="svc" href="#quote">
+        <img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/193bb0da-89ae-471f-87c7-4c82d32873cd-1920w.jpg" alt="Kitchen and bathroom fitting in Essex">
+        <div class="svc-label">
+          <h3>Kitchens &amp; bathrooms</h3>
+          <p>Full renovations, from first fix through to finish.</p>
+        </div>
+      </a>
+      <a class="svc" href="#quote">
+        <img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/a4fc1faa-d708-4dc7-b31e-834b684c4f7b-1920w.jpg" alt="Roofing repair works in Essex">
+        <div class="svc-label">
+          <h3>Roofing</h3>
+          <p>Repairs, maintenance and full roofing works.</p>
+        </div>
+      </a>
+      <a class="svc" href="#quote">
+        <img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/2e998d0d-e841-497d-91de-5838a6fe6268-1920w.jpg" alt="Landscaping and exterior works in Essex">
+        <div class="svc-label">
+          <h3>Landscaping</h3>
+          <p>Improve the outdoor space around your property.</p>
+        </div>
+      </a>
+    </div>
+    <div class="services-more">
+      <a href="#quote">Drainage &amp; sewer repairs</a>
+      <a href="#quote">Septic tanks &amp; biodisc</a>
+      <a href="#quote">Damp proofing &amp; timber treatment</a>
+      <a href="#quote">Double glazing</a>
+      <a href="#quote">Disabled adaptations</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="wrap">
+    <h2>One team. One project. Less hassle.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>Experienced</h3>
+        <p>Established in 1990, with decades of hands-on building work across Essex behind us.</p>
+      </div>
+      <div class="why-card">
+        <h3>Reliable</h3>
+        <p>We take on one site at a time rather than spreading our team across several jobs at once.</p>
+      </div>
+      <div class="why-card">
+        <h3>Quality tradesmen</h3>
+        <p>Bricklaying, plastering and carpentry from experienced tradespeople, with electrical and gas work certified.</p>
+      </div>
+      <div class="why-card">
+        <h3>Trusted locally</h3>
+        <p>Most of our work comes through returning clients and word of mouth, not advertising.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="wrap">
+    <h2>Real projects. Real results.</h2>
+    <p style="color:#4b463d;margin-top:12px;max-width:520px;">A look at the kind of work we take on across Essex. Replace these with your own before-and-after sets and site details.</p>
+
+    <div class="project">
+      <figure><img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/193bb0da-89ae-471f-87c7-4c82d32873cd-1920w.jpg" alt="Kitchen before renovation"><figcaption>Before</figcaption></figure>
+      <figure><img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/f834ffcf-d59d-4931-beaa-d78e760ce837-1920w.jpg" alt="Kitchen after renovation"><figcaption>After</figcaption></figure>
+      <div class="project-info">
+        <h3>Kitchen renovation</h3>
+        <div class="loc">Essex</div>
+        <ul>
+          <li>Plumbing &amp; electrical first fix</li>
+          <li>Plastering</li>
+          <li>Carpentry &amp; kitchen installation</li>
+        </ul>
+        <a href="#quote">Get a quote for work like this</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <figure><img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/aeb357ba-8a01-4be3-b6a6-1d94c4db0bd1-1920w.jpg" alt="Extension before build"><figcaption>Before</figcaption></figure>
+      <figure><img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/77c44bff-8da7-4747-a877-7e1e6cf2c9a1-1920w.jpg" alt="Completed house extension"><figcaption>After</figcaption></figure>
+      <div class="project-info">
+        <h3>Single-storey extension</h3>
+        <div class="loc">Essex</div>
+        <ul>
+          <li>Groundworks &amp; brickwork</li>
+          <li>Roofing</li>
+          <li>Full internal finish</li>
+        </ul>
+        <a href="#quote">Get a quote for work like this</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <figure><img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/2e998d0d-e841-497d-91de-5838a6fe6268-1920w.jpg" alt="Exterior and landscaping before"><figcaption>Before</figcaption></figure>
+      <figure><img src="https://irp.cdn-website.com//d0d3e219/dms3rep/multi/opt/a4fc1faa-d708-4dc7-b31e-834b684c4f7b-1920w.jpg" alt="Exterior and landscaping after"><figcaption>After</figcaption></figure>
+      <div class="project-info">
+        <h3>Exterior &amp; landscaping</h3>
+        <div class="loc">Essex</div>
+        <ul>
+          <li>Drainage works</li>
+          <li>Landscaping</li>
+          <li>Driveway &amp; finishing</li>
+        </ul>
+        <a href="#quote">Get a quote for work like this</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <h3>Tell us about your project</h3>
+          <p>Call us or send a quick enquiry with what you're looking to build, renovate or improve.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <h3>We discuss your requirements</h3>
+          <p>We'll talk through what you want to achieve, your budget and your timeframe.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <h3>Site visit &amp; assessment</h3>
+          <p>We come and look at the work in person before putting anything in writing.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <h3>Quote</h3>
+          <p>You get a clear, written proposal for the work — no vague estimates.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div>
+          <h3>Build</h3>
+          <p>Our team gets to work, on your site alone, until the job is done.</p>
+        </div>
+      </div>
+    </div>
+    <a href="#quote" class="btn btn-line-light process-cta">Start your project</a>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section class="areas" id="areas">
+  <div class="wrap areas-grid">
+    <div>
+      <h2>Builders across Essex</h2>
+      <p class="lead" style="margin-top:16px;">We work throughout Essex. If you're near any of these areas, we can likely help — and if you're not listed, get in touch anyway.</p>
+    </div>
+    <div class="area-tags">
+      <span>Maldon</span><span>Mayland</span><span>Burnham-on-Crouch</span>
+      <span>Southminster</span><span>Chelmsford</span><span>Witham</span>
+      <span>Colchester</span><span>Southend-on-Sea</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2>Questions we're asked</h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>What building services does Essex Improvements provide?</summary>
+        <p>Extensions, renovations, roofing, kitchens and bathrooms, landscaping, drainage and sewer repairs, septic tank systems, double glazing, damp proofing, timber treatment and disabled adaptations.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How long has Essex Improvements been established?</summary>
+        <p>We began trading in 1990 and became a limited company, Essex Improvements Ltd, in 2003.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you work on house extensions?</summary>
+        <p>Yes — house extensions are one of our main services, from single-storey additions to larger builds.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are your tradesmen qualified?</summary>
+        <p>Electrical work is carried out by certified NICEIC operatives, and plumbing and gas work is carried out and certified by Gas Safe professionals.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you work across all of Essex?</summary>
+        <p>We take on projects throughout Essex. Get in touch with your location and we'll confirm we can cover it.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do I get a quote?</summary>
+        <p>Call us or send an enquiry with a brief summary of the work. We'll arrange a site visit and follow up with a written quote.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="quote">
+  <div class="wrap">
+    <h2>Planning a building project in Essex?</h2>
+    <p>Tell us what you're looking to build, renovate or improve, and we'll get back to you with next steps.</p>
+    <div class="hero-ctas">
+      <a href="mailto:esseximprovementsltd@btinternet.com" class="btn" style="background:var(--ink);color:var(--paper);">Get a free quote</a>
+      <a href="tel:07768907267" class="btn btn-line-light">Call 07768 907267</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-brand">Essex <span>Improvements</span></div>
+      <p class="tag">Family-run builders working across Essex since 1990. Extensions, renovations, kitchens, bathrooms and property improvements.</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#why">About</a></li>
+        <li><a href="#areas">Areas we serve</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <ul>
+        <li><a href="tel:07768907267">07768 907267</a></li>
+        <li><a href="tel:01621740557">01621 740557</a></li>
+        <li><a href="mailto:esseximprovementsltd@btinternet.com">esseximprovementsltd@btinternet.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Essex Improvements Ltd. Federation of Master Builders affiliated.</span>
+    <span>NICEIC electrical · Gas Safe plumbing</span>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
